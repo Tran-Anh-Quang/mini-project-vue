@@ -10,7 +10,7 @@
 }
 
 .btn-action {
-  background-color: #00BD7E;
+  background-color: #00874F;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -49,5 +49,22 @@ a,
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
+  }
+}
+
+.vue-devtools__anchor-btn.panel-entry-btn {
+  background-color: #fff; /* or any other color that matches your design */
+  color: #333; /* or any other color that matches your design */
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f0f0f0; /* or any other hover color */
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #333; /* or any other focus color */
   }
 }

@@ -20,6 +20,14 @@ const router = createRouter({
       component: CreateView
     },
     {
+      path: '/create/:id',
+      name: 'update',
+      // route level code-splitting
+      // this generates a separate chunk (Create.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: CreateView
+    },
+    {
       path: '/user/:id',
       name: 'user-details',
       component: UserDetailsView

@@ -1,40 +1,38 @@
 <script setup>
 
-import {computed, onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import {useUserStore} from "@/stores/UserStore.js";
 
-const users = ref([]);
-const txtSearch = ref('');
+const store = useUserStore();
 const router = useRouter();
 
-onMounted(() => {
-  async function fetchUsers() {
-    try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/users');
-      users.value = await response.json();
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  }
+// onMounted(() => {
+//   async function fetchUsers() {
+//     try {
+//       const response = await fetch('https://jsonplaceholder.typicode.com/users');
+//       users.value = await response.json();
+//     } catch (error) {
+//       console.error('Error fetching users:', error);
+//     }
+//   }
+//
+// // Gọi hàm để lấy dữ liệu
+//   fetchUsers();
+//
+// })
 
-// Gọi hàm để lấy dữ liệu
-  fetchUsers();
-
-})
-
-const filterUser = computed(() => {
-  return users.value.filter(
-      item => item.name.toUpperCase().indexOf(txtSearch.value.toUpperCase()) !== -1
-      || item.email.toUpperCase().indexOf(txtSearch.value.toUpperCase()) !== -1);
-})
 
 </script>
 
 <template>
   <main style="padding: 2rem">
-    <input type="text" placeholder="Search" v-model="txtSearch">
+    <input
+        type="text"
+        placeholder="Search"
+        @input="event => store.handleTxtSearch(event.target.value)"
+    >
     <div class="group-card">
-      <div class="card-item" v-for="user in filterUser">
+      <div class="card-item" v-for="user in store.filterUser">
         <div @click="router.push({path: `/user/${user?.id}`})">
           <h2>{{ user?.name }}</h2>
           <i> {{ user?.email }}</i>

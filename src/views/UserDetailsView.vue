@@ -1,25 +1,15 @@
 <script setup>
-import {useRoute} from "vue-router";
-import {onMounted, ref} from "vue";
+import {useUserStore} from "@/stores/UserStore.js";
+import {useRoute, useRouter} from "vue-router";
 
-// muốn lấy được params dùng route
+const store = useUserStore();
 const route = useRoute();
-const user = ref(null);
+const router = useRouter();
 
-onMounted(() => {
-  async function fetchUser() {
-    try {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/users/${route.params.id}`);
-      user.value = await response.json();
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  }
-
-// Gọi hàm để lấy dữ liệu
-  fetchUser();
-
-})
+const redirectAfterDelete = () => {
+  store.handleDeleteUser(route.params.id);
+  router.push("/");
+}
 
 </script>
 
@@ -29,14 +19,14 @@ onMounted(() => {
       <h2>Thông tin chi tiết người dùng</h2>
       <div class="divider"></div>
       <div class="user-info">
-        <p><strong>Tên:</strong> {{ user?.name }} </p>
-        <p><strong>Tên đăng nhập:</strong> {{ user?.username }} </p>
-        <p><strong>Email:</strong> {{ user?.email }} </p>
+        <p><strong>Tên:</strong> {{ store.userDetails.name }} </p>
+        <p><strong>Tên đăng nhập:</strong> {{ store.userDetails.username }} </p>
+        <p><strong>Email:</strong> {{ store.userDetails.email }} </p>
       </div>
       <div class="divider"></div>
       <div class="address-info">
         <h3>Địa chỉ</h3>
-        <p><strong>Đường:</strong> {{ user?.address?.street }}} </p>
+        <p><strong>Đường:</strong> {{ user?.address?.street }} </p>
         <p><strong>Phòng:</strong> {{ user?.address?.suite }} </p>
         <p><strong>Thành phố:</strong> {{ user?.address?.city }} </p>
         <p><strong>Mã bưu điện:</strong> {{ user?.address?.zipcode }} </p>
@@ -45,7 +35,7 @@ onMounted(() => {
       <div class="divider"></div>
       <div class="contact-info">
         <h3>Liên hệ</h3>
-        <p><strong>Điện thoại:</strong> {{ user?.phone }} </p>
+        <p><strong>Điện thoại:</strong> {{ store.userDetails.phone }} </p>
         <p><strong>Trang web:</strong> {{ user?.website }} </p>
       </div>
       <div class="divider"></div>
@@ -55,6 +45,10 @@ onMounted(() => {
         <p><strong>Khẩu hiệu:</strong> {{ user?.company?.catchPhrase }} </p>
         <p><strong>Mô tả:</strong> {{ user?.company?.bs }} </p>
       </div>
+    </div>
+    <div style="display: flex; column-gap: 10rem">
+      <div style="margin-top: 1rem" class="btn-main" @click="redirectAfterDelete()">Delete</div>
+      <div style="margin-top: 1rem" class="btn-main" @click="router.push(`/create/${store.userDetails.id}`)">Update</div>
     </div>
   </main>
 </template>
