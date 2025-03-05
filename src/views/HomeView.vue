@@ -1,9 +1,11 @@
 <script setup>
 
 import {computed, onMounted, ref} from "vue";
+import {useRouter} from "vue-router";
 
 const users = ref([]);
 const txtSearch = ref('');
+const router = useRouter();
 
 onMounted(() => {
   async function fetchUsers() {
@@ -33,8 +35,10 @@ const filterUser = computed(() => {
     <input type="text" placeholder="Search" v-model="txtSearch">
     <div class="group-card">
       <div class="card-item" v-for="user in filterUser">
-        <h2>{{ user.name }}</h2>
-        <i> {{ user.email }}</i>
+        <div @click="router.push({path: `/user/${user?.id}`})">
+          <h2>{{ user?.name }}</h2>
+          <i> {{ user?.email }}</i>
+        </div>
       </div>
     </div>
   </main>
