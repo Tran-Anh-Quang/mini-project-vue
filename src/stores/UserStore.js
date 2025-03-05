@@ -1,27 +1,27 @@
 import {defineStore} from "pinia";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useRoute} from "vue-router";
 
 
 export const useUserStore = defineStore('users', () => {
     const route = useRoute();
     const txtSearch = ref('');
-    const users = ref([
-        {
-        id: 1,
-        name: 'Leanne Graham',
-        username: 'Bret',
-        email: '1iL0K@example.com',
-        phone: '1-770-736-8031 x56442',
-        },
-        {
-        id: 2,
-        name: 'Ervin Howell',
-        username: 'Antonette',
-        email: 'VZGd1@example.com',
-        phone: '010-692-6593 x09125',
-        },
-    ]);
+    const users = ref([]);
+
+    onMounted(() => {
+        async function fetchUsers() {
+            try {
+                const response = await fetch('https://jsonplaceholder.typicode.com/users');
+                users.value = await response.json();
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+
+        // Gọi hàm để lấy dữ liệu
+        fetchUsers();
+
+    })
 
     const handleTxtSearch = (value) => {
         txtSearch.value = value;

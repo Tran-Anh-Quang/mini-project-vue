@@ -6,22 +6,6 @@ import {useUserStore} from "@/stores/UserStore.js";
 const store = useUserStore();
 const router = useRouter();
 
-// onMounted(() => {
-//   async function fetchUsers() {
-//     try {
-//       const response = await fetch('https://jsonplaceholder.typicode.com/users');
-//       users.value = await response.json();
-//     } catch (error) {
-//       console.error('Error fetching users:', error);
-//     }
-//   }
-//
-// // Gọi hàm để lấy dữ liệu
-//   fetchUsers();
-//
-// })
-
-
 </script>
 
 <template>
