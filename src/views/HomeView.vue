@@ -1,8 +1,9 @@
 <script setup>
 
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 
 const users = ref([]);
+const txtSearch = ref('');
 
 onMounted(() => {
   async function fetchUsers() {
@@ -18,13 +19,20 @@ onMounted(() => {
   fetchUsers();
 
 })
+
+const filterUser = computed(() => {
+  return users.value.filter(
+      item => item.name.toUpperCase().indexOf(txtSearch.value.toUpperCase()) !== -1
+      || item.email.toUpperCase().indexOf(txtSearch.value.toUpperCase()) !== -1);
+})
+
 </script>
 
 <template>
   <main style="padding: 2rem">
-    <input type="text" placeholder="Search">
+    <input type="text" placeholder="Search" v-model="txtSearch">
     <div class="group-card">
-      <div class="card-item" v-for="user in users">
+      <div class="card-item" v-for="user in filterUser">
         <h2>{{ user.name }}</h2>
         <i> {{ user.email }}</i>
       </div>
