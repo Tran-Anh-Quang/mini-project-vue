@@ -1,25 +1,25 @@
 @import './base.css';
 
 .btn-main {
-  background-color: #2c3e50; /* mÃ u ná»n */
-  color: #fff; /* mÃ u chá»¯ */
-  border: none; /* khÃ´ng cÃ³ viá»n */
-  padding: 10px 20px; /* khoáº£ng cÃ¡ch trong nÃºt */
-  font-size: 16px; /* kÃ­ch thÆ°á»›c chá»¯ */
-  border-radius: 5px; /* bo gÃ³c */
+  background-color: #2c3e50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
 .btn-action {
-  background-color: #00BD7E; /* mÃ u ná»n */
-  color: #fff; /* mÃ u chá»¯ */
-  border: none; /* khÃ´ng cÃ³ viá»n */
-  padding: 10px 20px; /* khoáº£ng cÃ¡ch trong nÃºt */
-  font-size: 16px; /* kÃ­ch thÆ°á»›c chá»¯ */
-  border-radius: 5px; /* bo gÃ³c */
+  background-color: #00BD7E;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
 #app {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
